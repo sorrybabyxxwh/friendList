@@ -1,0 +1,69 @@
+
+<h1>Friend List</h1>
+
+<% if user_signed_in? %>
+
+  <div id="friends">
+    <table class="table table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>
+        <strong>Name:</strong>
+      </th>
+       <th>
+         <strong>Email:</strong>
+      </th>
+       <th>
+        <strong>Phone:</strong>
+      </th>
+       <th>
+        <strong>Twitter:</strong>
+      </th>
+      <th>
+        <strong>Id:</strong>
+      </th>
+      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+       <% @friends.each do |friend| %>
+           <% if friend.user == current_user %>
+      <tr>
+      <td>
+        <%= link_to friend.first_name + ' ' + friend.last_name, friend, class: "link-friend-list" %>
+      </td>
+       <td>
+         <%= friend.email %>
+      </td>
+       <td>
+        <%= friend.phone %>
+      </td>
+       <td>
+        <%= friend.twitter %>
+      </td>
+        <td>
+        <%= friend.user_id %>
+      </td>
+      <td>
+         <%= button_to "Delete", friend, method: :delete,  data: { turbo_confirm: 'message' }, class: "btn btn-outline-danger btn-sm" %>
+      </td>
+    </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+    
+  </div>
+
+  <%= link_to "New friend", new_friend_path, class:"btn btn-warning" %>
+<% else %>
+  <h1>Home</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<% end %>
